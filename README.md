@@ -35,10 +35,9 @@ spring.data.mongodb.port=27017
 ## Project Brief Information
   
 ## Screenshot
-![Image](https://github.com/tusharchaudhari30/scripting-project/blob/master/Snapshots/wrongpath.png)
+![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperlogout.PNG)
 
-![Image](https://github.com/tusharchaudhari30/scripting-project/blob/master/Snapshots/envfine.png)
-
+![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperhome.PNG)
 # About
 ----
 For More information and help in Project Mail me chaudharitushar2077@gmail.com

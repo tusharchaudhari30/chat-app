@@ -35,8 +35,7 @@ public class myUserDetailsService {
                 .pathMatchers("/**").authenticated().and()
                 .formLogin().loginPage("/login")
                 .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/"))
-                .and().logout().logoutUrl("/logout")
-                .logoutSuccessHandler(logoutSuccessHandler("/"))
+                .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler("/login"))
         ;
         return http.build();
     }

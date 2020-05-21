@@ -44,10 +44,9 @@ public class UserController {
         model.addAttribute("loginError", true);
         return "login";
     }
-
-    @RequestMapping("/logout")
-    public String logout() {
-        return "redirect:/";
+    @RequestMapping("/logoutuser")
+    public String logoutuser(){
+        return "logout";
     }
 
     @GetMapping(value = "/")

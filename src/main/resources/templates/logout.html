@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="thymeleaf/layouts/default">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        PAPER
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.25.3/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sse@0.1.4/jquery.sse.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <style>
+        .login-form{
+            align-self: center;
+            padding-top: 10%;
+        }
+        .logo{
+            color: #00695c;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="row login-form">
+        <form class="col s7 offset-s4" th:action="@{/logout}" method="post">
+            <div class="row">
+                <h2 class="col s12 offset-s1 logo"><i aria-hidden="true" class="fa fa-paper-plane"></i> PAPER</h2>
+            </div>
+            <div class="row">
+                <h4 class="col s12">You Sure want to logout !!</h4>
+            </div>
+            <div class="row">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            </div>
+            <div class="row">
+                <button class="teal btn waves-effect waves-light col s3 offset-s2" type="submit" name="action">Yupp! Do it!
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>

@@ -8,7 +8,6 @@ import com.tushar.chatapp.Repository.ChatRepository;
 import com.tushar.chatapp.Repository.MessageRepository;
 import com.tushar.chatapp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,8 +44,9 @@ public class UserController {
         model.addAttribute("loginError", true);
         return "login";
     }
+
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout() {
         return "redirect:/";
     }
 
@@ -56,9 +56,10 @@ public class UserController {
         Flux<Chat> chatFlux = this.chatRepository.findChatsByUsersidListOrderByDateDesc(userMono.map(user -> user.getId()));
         Mono<Chat> firstMono = chatFlux.next();
         Flux<Message> messageFlux = firstMono.flatMapMany(chat -> this.messageRepository.findAllByChatidOrderByDateAsc(chat.getId()));
+        final IReactiveDataDriverContextVariable contextVariable = new ReactiveDataDriverContextVariable(chatFlux);
         model.addAttribute("user", userMono);
         model.addAttribute("chat", firstMono);
-        model.addAttribute("recents", chatFlux);
+        model.addAttribute("recents", contextVariable);
         model.addAttribute("userid", userMono.map(user -> user.getId()));
         model.addAttribute("messages", messageFlux);
         return "index";
@@ -80,15 +81,13 @@ public class UserController {
     @GetMapping(value = "/chat/browse/{chatid}")
     public String browsechat(Principal principal, final Model model, @PathVariable String chatid) {
         Mono<User> userMono = (Mono<User>) model.getAttribute("user");
-        if (userMono == null) {
-            return "redirect:/";
-        }
         Flux<Message> messageFlux = this.messageRepository.findAllByChatidOrderByDateAsc(chatid);
         messageFlux.subscribe();
         Mono<Chat> chatMono = this.chatRepository.findChatById(chatid);
         chatMono.subscribe();
         Flux<Chat> chatFlux = this.chatRepository.findChatsByUsersidListOrderByDateDesc(userMono.map(User::getId));
-        model.addAttribute("recents", chatFlux);
+        final IReactiveDataDriverContextVariable contextVariable = new ReactiveDataDriverContextVariable(chatFlux);
+        model.addAttribute("recents", contextVariable);
         model.addAttribute("userid", userMono.map(user -> user.getId()));
         model.addAttribute("chat", chatMono);
         model.addAttribute("messages", messageFlux);
@@ -149,10 +148,12 @@ public class UserController {
     Message getmessage(Principal principal, Message message, Model model) {
         Mono<User> user = (Mono<User>) model.getAttribute("user");
         message.setMessageid(null);
-        user.doOnNext(u -> message.setFromUserid(u.getId())).subscribe();
         Mono<Chat> chatMono = (Mono<Chat>) model.getAttribute("chat");
         chatMono.subscribe();
-        chatMono.map(chat -> {
+        chatMono.zipWith(user).map(flux -> {
+            Chat chat=flux.getT1();
+            User user1=flux.getT2();
+            message.setFromUserid(user1.getId());
             message.setChatid(chat.getId());
             var uslist = chat.getUsersidList();
             for (var s : uslist) {
@@ -162,10 +163,13 @@ public class UserController {
             }
             chat.setRecent(message.getText());
             chat.setDate(message.getDate());
-            this.messageRepository.save(message).subscribe();
-            this.chatRepository.save(chat).subscribe();
+            if(message.getFromUserid()!=null) {
+                this.messageRepository.save(message).subscribe(System.out::println);
+                this.chatRepository.save(chat).subscribe(System.out::println);
+            }
             return chat;
         }).subscribe();
+
         return message;
     }
 }

@@ -77,7 +77,7 @@
             </div>
             <div class="mesgs">
                 <div class="msg_history" id="#msghistory">
-                    <div data-th-each="msg : ${messages}">
+                    <div th:each="msg : ${messages}">
                         <div th:if="${msg.FromUserid == userid}">
                             <div class="outgoing_msg ">
                                 <div class="sent_msg ">

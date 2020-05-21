@@ -1,0 +1,119 @@
+<html xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="thymeleaf/layouts/default">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">-->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.25.3/moment.min.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sse@0.1.4/jquery.sse.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script th:src="@{/js/custom.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
+          type="text/css">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+</head>
+<body>
+<div class="container">
+
+    <div class="messaging">
+        <nav class="teal lighten-2">
+            <div class="nav-wrapper ">
+                <a href="#!" class="brand-logo center"><i aria-hidden="true" class="fa fa-paper-plane"></i>PAPER</a>
+                <ul class="right">
+                    <li class="active"><a th:href="@{/logout}">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch ">
+                    <div class="recent_heading">
+                        <h4>Recent</h4>
+                    </div>
+                    <div class="srch_bar">
+                        <div class="stylish-input-group">
+                            <input class="search-bar" placeholder="Search" type="text">
+                            <span class="input-group-addon">
+                <button type="button"> <i aria-hidden="true" class="fa fa-search"></i> </button>
+                </span></div>
+                    </div>
+                </div>
+                <div class="inbox_chat">
+                    <div class="chats card-panel">
+                        <div data-th-each="recent,iterator :${recents}" id="chatlistsse"
+                             th:id="${'chatcounter'+iterator.count}">
+                            <a th:href="'/chat/browse/'+${recent.id}">
+                                <div class="chat_list hoverable">
+                                    <div class="chat_people">
+                                        <div class="chat_img"><img alt="tushar"
+                                                                   src="https://ptetutorials.com/images/user-profile.png">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5 th:text="${recent.name}">
+
+                                            </h5>
+                                            <p th:text="${recent.recent}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="input-field" id="search_email">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" class="validate email">
+                        <label for="icon_prefix">Email</label>
+                    </div>
+                    <a class="btn-floating btn-large waves-effect waves-light teal darken-2 " id="action_button"><i
+                            class="material-icons">chat</i></a>
+                </div>
+            </div>
+            <div class="mesgs">
+                <div class="msg_history" id="#msghistory">
+                    <div data-th-each="msg : ${messages}">
+                        <div th:if="${msg.FromUserid == userid}">
+                            <div class="outgoing_msg ">
+                                <div class="sent_msg ">
+                                    <p>[[${msg.text}]]</p>
+                                    <span class="time_date"
+                                          th:text="${#dates.format(msg.date, 'dd/MM/yyyy hh:mm a')}"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div th:if="${msg.FromUserid != userid}">
+                            <div class="incoming_msg_img"><img alt="Tushar"
+                                                               src="https://ptetutorials.com/images/user-profile.png">
+                            </div>
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p>[[${msg.text}]]</p>
+                                    <span class="time_date"
+                                          th:text="${#dates.format(msg.date, 'dd/MM/yyyy hh:mm a')}"></span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <input class="input-field write_msg" placeholder="Type a message" type="text"/>
+                        <button class="msg_send_btn" id="send" type="button"><i aria-hidden="true"
+                                                                                class="fa fa-paper-plane-o"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

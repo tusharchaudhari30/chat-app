@@ -32,13 +32,20 @@
 <body>
 <div class="container">
     <div class="row login-form">
-        <form class="col s7 offset-s4" method="post" th:action="@{/login}">
+        <form class="col s7 offset-s4" method="post" th:action="@{/register}">
             <div class="row">
                 <h3 class=" col s4 offset-s2 logo"><i aria-hidden="true" class="fa fa-paper-plane"></i> PAPER</h3>
             </div>
             <div class="row">
+                <div class="input-field col s12 m8 l8">
+                    <input id="name" name="name">
+                    <label for="name">Name</label>
+                    <span class="helper-text">Enter name  !!</span>
+                </div>
+            </div>
+            <div class="row">
                 <div class="input-field col s10 m8 l8">
-                    <input class="validate" id="email" name="username" type="email">
+                    <input class="validate" id="email" name="email" type="email">
                     <label for="email">Email</label>
                     <span class="helper-text" data-error="Correct Email Please"
                           data-success="Perfect !">Enter email  !!</span>
@@ -51,14 +58,9 @@
                 </div>
             </div>
             <div class="row">
-                <button class="teal btn waves-effect waves-light col s4 offset-s2" name="action" type="submit">Submit
-                    <i class="material-icons right">send</i>
+                <button class="teal btn waves-effect waves-light col s4 offset-s2" name="action" type="submit">Create<i
+                        class="material-icons right">send</i>
                 </button>
-            </div>
-            <div class="row">
-                <a class="teal btn waves-effect waves-light col s4 offset-s2" th:href="@{/register}">Register
-                    <i class="material-icons right">send</i>
-                </a>
             </div>
         </form>
 

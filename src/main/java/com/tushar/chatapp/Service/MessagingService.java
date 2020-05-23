@@ -7,6 +7,7 @@ import com.tushar.chatapp.Repository.ChatRepository;
 import com.tushar.chatapp.Repository.MessageRepository;
 import com.tushar.chatapp.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,6 +20,8 @@ import java.util.Map;
 @Service
 public class MessagingService {
     @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
     UserRepository userRepository;
     @Autowired
     ChatRepository chatRepository;
@@ -27,6 +30,13 @@ public class MessagingService {
 
     public Mono<User> getUserByEmail(String email) {
         return this.userRepository.findUserByEmail(email);
+    }
+
+    public void saveuser(User user) {
+        user.setId(null);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        this.userRepository.save(user).subscribe();
     }
 
     public Flux<Chat> getChatListByDateAndUserid(Mono<User> userMono) {

@@ -30,7 +30,7 @@ public class myUserDetailsService {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.authorizeExchange()
-                .pathMatchers("/login")
+                .pathMatchers("/login", "/register")
                 .permitAll()
                 .pathMatchers("/**").authenticated().and()
                 .formLogin().loginPage("/login")

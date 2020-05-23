@@ -42,6 +42,17 @@ public class UserController {
         return "logout";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerpost(User user) {
+        this.messagingService.saveuser(user);
+        return "login";
+    }
+
     @GetMapping(value = "/")
     String home(final Principal principal, final Model model) {
         final Mono<User> userMono = this.messagingService.getUserByEmail(principal.getName());

@@ -51,8 +51,7 @@ Highlights of this application are:
    
   
 ## Screenshot
-![](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperlogout.PNG | width=100)
-![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperlogout.PNG =250*250)
+![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperlogout.PNG)
 
 ![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperhome.PNG)
 # About

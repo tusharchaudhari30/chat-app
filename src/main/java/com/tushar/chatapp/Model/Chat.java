@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -16,9 +17,10 @@ import java.util.List;
 public class Chat {
     @Id
     private String id;
-    private List<String> usersidList;
+    private Map<String, String> usersidlist;
     private Date date;
     private String recent;
-    private String name;
+    private List<String> users;
+
 
 }

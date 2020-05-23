@@ -8,9 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +22,12 @@ public class User implements UserDetails {
     private String password;
     private Boolean active;
     private Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+
+    public Map<String, String> convertmap() {
+        Map<String, String> stringMap = new HashMap<String, String>();
+        stringMap.put(id, name);
+        return stringMap;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

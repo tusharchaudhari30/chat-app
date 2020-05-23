@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 
 public interface ChatRepository extends ReactiveMongoRepository<Chat, String> {
-    Flux<Chat> findChatsByUsersidListOrderByDateDesc(Mono<String> userid);
+    Flux<Chat> findChatsByUsersOrderByDateDesc(Mono<String> id);
 
     Mono<Chat> findChatById(String chatid);
 }

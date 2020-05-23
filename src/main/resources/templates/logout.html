@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="thymeleaf/layouts/default"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="thymeleaf/layouts/default">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>
@@ -17,11 +17,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
           type="text/css">
     <style>
-        .login-form{
+        .login-form {
             align-self: center;
             padding-top: 10%;
         }
-        .logo{
+
+        .logo {
             color: #00695c;
         }
 
@@ -31,7 +32,7 @@
 <body>
 <div class="container">
     <div class="row login-form">
-        <form class="col s7 offset-s4" th:action="@{/logout}" method="post">
+        <form class="col s7 offset-s4" method="post" th:action="@{/logout}">
             <div class="row">
                 <h2 class="col s12 offset-s1 logo"><i aria-hidden="true" class="fa fa-paper-plane"></i> PAPER</h2>
             </div>
@@ -39,10 +40,11 @@
                 <h4 class="col s12">You Sure want to logout !!</h4>
             </div>
             <div class="row">
-                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                <input name="_csrf" th:value="${_csrf.token}" type="hidden">
             </div>
             <div class="row">
-                <button class="teal btn waves-effect waves-light col s3 offset-s2" type="submit" name="action">Yupp! Do it!
+                <button class="teal btn waves-effect waves-light col s3 offset-s2" name="action" type="submit">Yupp! Do
+                    it!
                     <i class="material-icons right">send</i>
                 </button>
             </div>

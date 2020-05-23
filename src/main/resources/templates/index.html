@@ -1,7 +1,7 @@
-<html xmlns:th="http://www.thymeleaf.org"
+<html layout:decorator="thymeleaf/layouts/default"
 
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="thymeleaf/layouts/default">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">-->
@@ -25,10 +25,10 @@
     <div class="messaging">
         <nav class="teal lighten-2">
             <div class="nav-wrapper ">
-                <a href="#!" class="brand-logo center"><i aria-hidden="true" class="fa fa-paper-plane"></i>PAPER</a>
+                <a class="brand-logo center" href="#!"><i aria-hidden="true" class="fa fa-paper-plane"></i>PAPER</a>
                 <ul class="right">
                     <li class="active">
-                        <a th:href="@{/logoutuser}">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                        <a th:href="@{/logoutuser}">Logout <i aria-hidden="true" class="fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
         </nav>
@@ -57,10 +57,14 @@
                                                                    src="https://ptetutorials.com/images/user-profile.png">
                                         </div>
                                         <div class="chat_ib">
-                                            <h5 th:text="${recent.name}">
-
-                                            </h5>
-                                            <p th:text="${recent.recent}"></p>
+                                            <div th:each=" map : ${recent.usersidlist}">
+                                                <div th:if="${map.key != userid}">
+                                                    <h5>[[${map.value}]]<span class="chat_date"
+                                                                              th:text="${#dates.format(recent.date, 'hh:mm a')}"></span>
+                                                    </h5>
+                                                    <p th:text="${recent.recent}"></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +73,7 @@
                     </div>
                     <div class="input-field" id="search_email">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" class="validate email">
+                        <input class="validate email" id="icon_prefix" type="text">
                         <label for="icon_prefix">Email</label>
                     </div>
                     <a class="btn-floating btn-large waves-effect waves-light teal darken-2 " id="action_button"><i

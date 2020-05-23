@@ -30,7 +30,7 @@ public class myUserDetailsService {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.authorizeExchange()
-                .pathMatchers("/login","/js/**","/css/**","/img/**")
+                .pathMatchers("/login")
                 .permitAll()
                 .pathMatchers("/**").authenticated().and()
                 .formLogin().loginPage("/login")
@@ -39,11 +39,13 @@ public class myUserDetailsService {
         ;
         return http.build();
     }
+
     public ServerLogoutSuccessHandler logoutSuccessHandler(String uri) {
         RedirectServerLogoutSuccessHandler successHandler = new RedirectServerLogoutSuccessHandler();
         successHandler.setLogoutSuccessUrl(URI.create(uri));
         return successHandler;
     }
+
     @Bean
     public ReactiveUserDetailsService userDetailsService() {
         return (username) -> userRepository.findByEmail(username);

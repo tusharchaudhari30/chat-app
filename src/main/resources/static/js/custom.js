@@ -23,6 +23,9 @@ $('.inbox_chat').ready(() => {
     );
 })
 $(document).ready(() => {
+    $('.fixed-action-btn').floatingActionButton({
+        toolbarEnabled: true
+    });
     $(".msg_history").animate({scrollTop: $('.msg_history').prop("scrollHeight")}, 100);
     $("#send").click(() => {
         var req = {

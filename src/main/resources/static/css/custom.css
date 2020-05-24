@@ -9,16 +9,21 @@ img {
 
 .inbox_people {
     background: #ffffff none repeat scroll 0 0;
-    float: left;
-    overflow: hidden;
-    width: 40%;
     border-right: 1px solid #c4c4c4;
+}
+@media screen and (max-width: 600px) {
+    #action_button {
+        left: 274px !important;
+    }
+
+    #search_email {
+        left: 91px !important;
+    }
+
 }
 
 .inbox_msg {
     border: 1px solid #c4c4c4;
-    clear: both;
-    overflow: hidden;
 }
 
 .top_spac {
@@ -39,7 +44,6 @@ img {
 
 .headind_srch {
     padding: 10px 29px 10px 20px;
-    overflow: hidden;
     border-bottom: 1px solid #c4c4c4;
 }
 
@@ -110,6 +114,7 @@ img {
 
 .inbox_chat {
     height: 550px;
+    overflow-x: hidden;
     overflow-y: scroll;
 }
 
@@ -154,11 +159,6 @@ img {
     width: 57%;
 }
 
-.mesgs {
-    float: left;
-    padding: 30px 15px 0 25px;
-    width: 60%;
-}
 
 .sent_msg p {
     background: #00796b none repeat scroll 0 0;
@@ -207,23 +207,21 @@ img {
     width: 33px;
 }
 
-.messaging {
-    padding: 0 0 50px 0;
-}
+
 
 .msg_history {
-    height: 516px;
+    height: 570px;
     overflow-y: auto;
 }
 
 #action_button {
     position: absolute;
-    bottom: 9%;
-    right: 59%;
+    top: 600px;
+    left: 37%;
 }
 
 #search_email {
     position: absolute;
-    right: 64%;
-    bottom: 7%;
+    left: 21%;
+    top: 594px;
 }

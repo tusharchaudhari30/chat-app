@@ -22,7 +22,7 @@
 <body>
 <div class="container">
 
-    <div class="messaging">
+    <div class="messaging row">
         <nav class="teal lighten-2">
             <div class="nav-wrapper ">
                 <a class="brand-logo center" href="/"><i aria-hidden="true" class="fa fa-paper-plane"></i>PAPER</a>
@@ -32,8 +32,8 @@
                 </ul>
             </div>
         </nav>
-        <div class="inbox_msg">
-            <div class="inbox_people">
+        <div class="inbox_msg row">
+            <div class="inbox_people col l5 s4">
                 <div class="headind_srch ">
                     <div class="recent_heading">
                         <h4>Recent</h4>
@@ -47,11 +47,11 @@
                     </div>
                 </div>
                 <div class="inbox_chat">
-                    <div class="chats card-panel">
+                    <div class="chats">
                         <div data-th-each="recent,iterator :${recents}" id="chatlistsse"
                              th:id="${iterator.count}">
                             <a th:href="'/chat/browse/'+${recent.id}">
-                                <div class="chat_list hoverable">
+                                <div class="chat_list">
                                     <div class="chat_people">
                                         <div class="chat_img"><img alt="tushar"
                                                                    src="https://ptetutorials.com/images/user-profile.png">
@@ -79,8 +79,9 @@
                     <a class="btn-floating btn-large waves-effect waves-light teal darken-2 " id="action_button"><i
                             class="material-icons">chat</i></a>
                 </div>
+
             </div>
-            <div class="mesgs">
+            <div class="mesgs col l7 s8 ">
                 <div class="msg_history" id="#msghistory">
                     <div th:each="msg : ${messages}">
                         <div th:if="${msg.FromUserid == userid}">

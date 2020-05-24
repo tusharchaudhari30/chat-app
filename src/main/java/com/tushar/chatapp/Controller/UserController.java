@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping(value = "/api/sse/recents")
     public String recentssse(Principal principal, final Model model) {
         if (principal.getName() == null) {
-            return "redirect:/";
+            return null;
         }
         final Mono<User> userMono = this.messagingService.getUserByEmail(principal.getName());
         final Flux<Chat> chatFlux = this.messagingService.getChatListByDateAndUserid(userMono);
@@ -131,6 +131,9 @@ public class UserController {
     @PostMapping(value = "/api/msg")
     Message getmessage(Principal principal, Message message, Model model) {
         if (principal.getName() == null) {
+            return null;
+        }
+        if (message.getText() == null) {
             return null;
         }
         final Mono<User> userMono = this.messagingService.getUserByEmail(principal.getName());

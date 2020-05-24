@@ -82,8 +82,10 @@ public class MessagingService {
             chat.setDate(new Date());
             return chat;
         });
-        chatmono.subscribe(chat1 -> this.chatRepository.save(chat1).subscribe());
-        return chatmono;
+        chatmono.subscribe();
+        Mono<Chat> savedchat = chatmono.flatMap(chat1 -> this.chatRepository.save(chat1));
+        savedchat.subscribe();
+        return savedchat;
     }
 
     public Message sendMessage(Mono<User> userMono, Message message, Mono<Chat> chatMono) {

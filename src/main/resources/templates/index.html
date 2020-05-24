@@ -49,7 +49,7 @@
                 <div class="inbox_chat">
                     <div class="chats card-panel">
                         <div data-th-each="recent,iterator :${recents}" id="chatlistsse"
-                             th:id="${'chatcounter'+iterator.count}">
+                             th:id="${iterator.count}">
                             <a th:href="'/chat/browse/'+${recent.id}">
                                 <div class="chat_list hoverable">
                                     <div class="chat_people">

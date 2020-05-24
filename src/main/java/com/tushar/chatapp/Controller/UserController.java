@@ -122,7 +122,9 @@ public class UserController {
         if (email == null) {
             return null;
         }
-        return this.messagingService.addChatByEmail(email, userMono);
+        Mono<Chat> chatMono = this.messagingService.addChatByEmail(email, userMono);
+        model.addAttribute("chat", chatMono);
+        return chatMono;
     }
 
     @ResponseBody

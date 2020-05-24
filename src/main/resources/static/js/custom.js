@@ -16,7 +16,7 @@ $('.inbox_chat').ready(() => {
     es.addEventListener('message', (event) => {
             let eventhtml = $.parseHTML(event.data);
             let viewhtml = document.getElementById(eventhtml[0].id);
-            if (viewhtml.innerHTML != eventhtml[0].innerHTML) {
+            if (viewhtml.innerHTML !== eventhtml[0].innerHTML) {
                 viewhtml.innerHTML = eventhtml[0].innerHTML;
             }
         }
@@ -86,8 +86,10 @@ $('#action_button').ready(() => {
         $('.email').keypress((Event) => {
             var keycode = (Event.keyCode ? Event.keyCode : Event.which);
             if (keycode == '13') {
+                let email = $('.email').val();
+                $('.email').val("");
                 $.ajax({
-                    url: "/api/addchat/" + $('.email').val(),
+                    url: "/api/addchat/" + email,
                     method: "GET",
                     headers:
                         {
@@ -96,19 +98,28 @@ $('#action_button').ready(() => {
                     datatype: "json",
                     success: (data1, textstatus, jqhr) => {
                         if (textstatus == 'success') {
+                            let count;
+                            if ($('.chats')[0].lastElementChild == null) {
+                                count = 1;
+                            } else {
+                                count = parseInt($('.chats')[0].lastElementChild.id) + 1;
+                            }
+
                             $('.chats').append("" +
+                                "<div id='" + count + "'>" +
                                 "<a href='/chat/browse/" + data1.id + "'> <div class='chat_list hoverable'> <div class=\"chat_people\">\n" +
                                 "                                <div class=\"chat_img\"><img alt=\"tushar\"\n" +
                                 "                                                           src=\"https://ptetutorials.com/images/user-profile.png\"></div>\n" +
                                 "                                <div class=\"chat_ib\">\n" +
                                 "                                    <h5><span class=\"chat_date\"\n" +
                                 "                                                                       >" + moment(data1.date).format('h:mm a') + "</span>\n" +
-                                "                                    " + data1.name + "</h5>\n" +
-                                "                                    <p>" + "</p>\n" +
+                                "                                    " + data1.usersidlist[data1.users[0]] + "</h5>\n" +
+                                "                                     <p>" + "</p>\n" +
                                 "                                </div>\n" +
                                 "                            </div>" +
                                 "</div>" +
-                                "</a>");
+                                "</a>" +
+                                "</div>");
                             $('.email').val("");
                         } else {
                             $(".email").val("Can't find user");

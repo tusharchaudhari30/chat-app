@@ -36,8 +36,8 @@ spring.data.mongodb.port=27017
 
 This project is the demonstration of how to implement reactive dom which changes without touching the refresh.
 The best feature of using this is you don't need to use Single page application such as React or Angular you can do it with just
-small code of plain Javascript. This application is not Single page application which result in low dependency size and good performance. This project utilizes concept of Server Sent event with thymleaf support to reactive streams. I used various aspect where
-you can implement is various highlight given bellow.
+small code of plain Javascript. This application is not Single page application which result in low dependency size and good performance. This project utilizes concept of Server Sent event with thymleaf support to reactive streams. Various aspect where
+you can implement is given bellow.
 
 Highlights of this application are:
    * Use of Thymeleaf's integration module for Spring 5's WebFlux reactive web framework.

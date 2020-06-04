@@ -1,4 +1,7 @@
 # PAPER
+![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/chat-app.gif)
+
+
 
 This is real time messaging web-app created by using SSE(Server Sent Event) async protocol and Spring Reactive stack.
 ## Getting Started
@@ -51,9 +54,7 @@ Highlights of this application are:
    
   
 ## Screenshot
-![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperlogout.PNG)
-
-![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/paperhome.PNG)
+![Image](https://github.com/tusharchaudhari30/chat-app/blob/master/doc/chat-app.gif)
 # About
 ----
 For More information and help in Project Mail me chaudharitushar2077@gmail.com
